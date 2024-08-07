@@ -13,7 +13,25 @@ const galleryMarkup = galleryItems.map(({ preview, original, description }) => {
     </li>`;
 }).join('');
 
+
 galleryContainer.innerHTML = galleryMarkup;
+galleryContainer.addEventListener('click', onGalleryItemClick);
+
+function onGalleryItemClick(event) {
+  event.preventDefault();
+
+  const isImage = event.target.classList.contains('gallery__image');
+  if (!isImage) return;
+  const largeImageURL = event.target.closest('a').href;
+  
+  const instance = basicLightbox.create(`
+   // <img src="${largeImageURL}" width="800" height="600">
+  `);
+
+  instance.show();
+  }
+
+
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250, 
