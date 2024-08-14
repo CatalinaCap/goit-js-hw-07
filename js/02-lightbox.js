@@ -15,22 +15,15 @@ const galleryMarkup = galleryItems.map(({ preview, original, description }) => {
 
 
 galleryContainer.innerHTML = galleryMarkup;
-galleryContainer.addEventListener('click', onGalleryItemClick);
 
-function onGalleryItemClick(event) {
+galleryContainer.addEventListener('click', (event) => {
   event.preventDefault();
 
   const isImage = event.target.classList.contains('gallery__image');
   if (!isImage) return;
-  const largeImageURL = event.target.closest('a').href;
-  
-  const instance = basicLightbox.create(`
-   // <img src="${largeImageURL}" width="800" height="600">
-  `);
 
-  instance.show();
-  }
-
+  event.stopPropagation();
+});
 
 let lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
